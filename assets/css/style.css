@@ -74,6 +74,11 @@ header {
 	inset #bfecf7 0 0 0 23px;
 }
 
+.forecast {
+	padding-left: 3px;
+	padding-right: 3px;
+}
+
 #uvBlurb {
 	border: 2px solid solid;
 	border-radius: 4px;
@@ -233,6 +238,11 @@ a {
 		inset #bfecf7 0 0 0 17px;
 	}
 
+	.forecast {
+		padding-left: 3px;
+		padding-right: 3px;
+	}
+
 	footer {
 		font-size: 14px;
 	}
@@ -322,6 +332,11 @@ a {
 		inset #88e2f7 0 0 0 10px,
 		inset #c5f4ff 0 0 0 12px,
 		inset #bfecf7 0 0 0 13px;
+	}
+
+	.forecast {
+		padding-left: 3px;
+		padding-right: 3px;
 	}
 
 	footer {
@@ -414,6 +429,11 @@ a {
 		inset #88e2f7 0 0 0 10px,
 		inset #c5f4ff 0 0 0 12px,
 		inset #bfecf7 0 0 0 13px;
+	}
+
+	.forecast {
+		padding-left: 3px;
+		padding-right: 3px;
 	}
 
 	footer {

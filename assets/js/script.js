@@ -139,7 +139,7 @@ $(document).ready(function () {
 				</h3>
 
 				<h5>
-					(${moment().utc().add(currentWeatherData.timezone, "s").format("M/D/YY h:mm)")}
+					(${moment().utc().add(currentWeatherData.timezone, "s").format("dddd M/D/YY h:mm)")}
 				<h5>
 
 				<h5>
@@ -193,7 +193,7 @@ $(document).ready(function () {
 				$(`<div class='col forecast added'>
 
 					<div class='animated fadeIn row'>
-						<h4>${moment.unix(oneCallData.daily[i].dt).format("M-D")}</h4>
+						<h4>${moment.unix(oneCallData.daily[i].dt).format("dd M-D")}</h4>
 					</div>
 
 					<div class='animated fadeIn row'>
