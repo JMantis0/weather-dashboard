@@ -1,11 +1,10 @@
 /* inset border technique borrowed from https://css-tricks.com/body-border/ */
 html {
 	background-color: white;
-	height:100%
+	
 }
 body {
 	background-color:#18cdf7;
-	height:100%
 }
 
 header {
@@ -72,6 +71,7 @@ header {
 	inset #88e2f7 0 0 0 17px,
 	inset #c5f4ff 0 0 0 22px,
 	inset #bfecf7 0 0 0 23px;
+	background-color:#18cdf7;
 }
 
 .forecast {
