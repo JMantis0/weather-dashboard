@@ -100,14 +100,24 @@ $(document).ready(function () {
 			if(!$(".histBtn").hasClass(currentWeatherData.name)) {
 
 				storedSearches.push(currentWeatherData.name);
-			
-				localStorage.setItem("searches", JSON.stringify(storedSearches));
-				
-				let newRow = $(`<div class='row histRow'></div>`)
+				localStorage.setItem("searches", JSON.stringify(storedSearches));	
+				let newRow = $(`<div class='row histRow'></div>`);
 				let histBtn = $(`<button class='btn btn-outline-secondary histBtn ${currentWeatherData.name}' id='${currentWeatherData.name}' type='button'>${currentWeatherData.name}</button>`);
 				let delBtn = $(`<span class="btn del">&times;</span>`);
 				newRow.append(histBtn);
 				histBtn.append(delBtn);
+				history.prepend(newRow);
+
+			}
+			else {
+
+				storedSearches = storedSearches.filter(item => item !== currentWeatherData.name);
+				storedSearches.push(currentWeatherData.name);	
+				localStorage.setItem("searches", JSON.stringify(storedSearches));
+				let existingBtn = $(`[id ='${currentWeatherData.name}']`);
+				existingBtn.parents(".histRow").remove();
+				let newRow = $(`<div class='row histRow'></div>`);
+				newRow.append(existingBtn);
 				history.prepend(newRow);
 			}
 
@@ -218,6 +228,7 @@ $(document).ready(function () {
 			}
 
 			assignListeners();
+			cityInput.val("");
 
 		});
 
