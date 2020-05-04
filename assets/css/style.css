@@ -1,0 +1,423 @@
+/* inset border technique borrowed from https://css-tricks.com/body-border/ */
+html {
+	background-color: white;
+	height:100%
+}
+body {
+	background-color:#18cdf7;
+	height:100%
+}
+
+header {
+	background-color: #18cdf7;;
+	vertical-align: center;
+}
+
+#searchHeader {
+	margin-left:15px;
+}
+
+#searchBtn {
+	background-color: white;
+	
+}
+
+.histBtn {
+	width: 100%;
+	text-align: left;
+	position: relative;
+	margin-top: 5px;
+}
+
+.del {
+	position:absolute;
+	top:-1%;
+	right:-1%;
+	padding: 0 0 0 0;
+	width: 15%;
+}
+
+#currentDay img {
+	width: 150px;
+	height: 150px;
+}
+
+.searchCol, #currentDay, .forecast, header {
+	padding: 40px;
+	overflow-x: hidden; /* For Opera */
+	-webkit-box-shadow:
+	inset #19d4ff 0 0 0 5px,
+	inset #18cdf7 0 0 0 1px,
+	inset #53dfff 0 0 0 10px,
+	inset #50d8f7 0 0 0 11px,
+	inset #8ce9ff 0 0 0 16px,
+	inset #88e2f7 0 0 0 17px,
+	inset #c5f4ff 0 0 0 22px,
+	inset #bfecf7 0 0 0 23px;
+	-moz-box-shadow:
+	inset #19d4ff 0 0 0 5px,
+	inset #18cdf7 0 0 0 1px,
+	inset #53dfff 0 0 0 10px,
+	inset #50d8f7 0 0 0 11px,
+	inset #8ce9ff 0 0 0 16px,
+	inset #88e2f7 0 0 0 17px,
+	inset #c5f4ff 0 0 0 22px,
+	inset #bfecf7 0 0 0 23px;
+	box-shadow:
+	inset #19d4ff 0 0 0 5px,
+	inset #18cdf7 0 0 0 1px,
+	inset #53dfff 0 0 0 10px,
+	inset #50d8f7 0 0 0 11px,
+	inset #8ce9ff 0 0 0 16px,
+	inset #88e2f7 0 0 0 17px,
+	inset #c5f4ff 0 0 0 22px,
+	inset #bfecf7 0 0 0 23px;
+}
+
+#uvBlurb {
+	border: 2px solid solid;
+	border-radius: 4px;
+	padding: 0 5px 0 5px;
+}
+
+.lowUV {
+	background-color: rgb(75, 255, 75);
+}
+
+.moderateUV {
+	background-color: rgb(255, 255, 4);
+
+}
+
+.highUV {
+	background-color: orange;
+}
+
+.veryHighUV {
+	background-color: rgb(255, 38, 38);
+}
+
+.extremeUV {
+	background-color: rgb(255, 38, 255)
+}
+
+.forecast > * {
+	margin:0 auto;
+	align-items: center;
+	justify-content: center;
+	color:black;
+}
+
+.low {
+	color: blue;
+}
+
+.high {
+	color:red;
+}
+
+.fa-tint {
+	margin-top: 3px;
+}
+
+#toggleBtn {
+	position: fixed;
+	top:5px;
+	right:5px;
+	z-index: 3;
+}
+
+#searchCol {
+	background-color:white;
+	position: fixed;
+	right:20px;
+	top: 43px;
+	z-index: 300;
+	width:250px;
+}
+
+footer {
+	margin-top: 3%;
+	padding-bottom: 3%;
+	text-align:center;
+	font-size: 16px;
+}
+
+a {
+	color:red;
+}
+
+@media screen and (max-width: 768px) {
+	h1 {
+		font-size: 35px;
+	}
+	h3 {
+		font-size: 24px;
+	}
+	h4 {
+		font-size: 20px;
+	}
+	h5 {
+		font-size: 14px;
+	}
+	#currentDay img {
+		height: 90px;
+		width: 90px;
+	}
+	
+	img {
+		width: 82.5px;
+		height: 82.5px;
+	}
+
+	.forecast div {
+		font-size: 12px;
+		font-weight: 600;
+	}
+
+	.btn{
+		font-size: 14px;
+		padding: 4px 9px;
+	}
+
+	input[type="text"] {
+		font-size: 14px;
+	}
+
+	#searchInput {
+		height: 30.8px;
+	}
+
+	#searchCol {
+		top: 36px;
+		width:200px;
+	}
+	
+	.del {
+		position:absolute;
+		top:-2%;
+		right:-2%;
+		padding: 0 0 0 0;
+		width: 15%;
+	}
+
+	.searchCol, #currentDay, .forecast, header {
+		padding: 30px;
+		overflow-x: hidden; /* For Opera */
+		-webkit-box-shadow:
+		inset #19d4ff 0 0 0 4px,
+		inset #18cdf7 0 0 0 1px,
+		inset #53dfff 0 0 0 8px,
+		inset #50d8f7 0 0 0 9px,
+		inset #8ce9ff 0 0 0 12px,
+		inset #88e2f7 0 0 0 13px,
+		inset #c5f4ff 0 0 0 16px,
+		inset #bfecf7 0 0 0 17px;
+		-moz-box-shadow:
+		inset #19d4ff 0 0 0 4px,
+		inset #18cdf7 0 0 0 1px,
+		inset #53dfff 0 0 0 8px,
+		inset #50d8f7 0 0 0 9px,
+		inset #8ce9ff 0 0 0 12px,
+		inset #88e2f7 0 0 0 13px,
+		inset #c5f4ff 0 0 0 16px,
+		inset #bfecf7 0 0 0 17px;
+		box-shadow:
+		inset #19d4ff 0 0 0 4px,
+		inset #18cdf7 0 0 0 1px,
+		inset #53dfff 0 0 0 8px,
+		inset #50d8f7 0 0 0 9px,
+		inset #8ce9ff 0 0 0 12px,
+		inset #88e2f7 0 0 0 13px,
+		inset #c5f4ff 0 0 0 16px,
+		inset #bfecf7 0 0 0 17px;
+	}
+
+	footer {
+		font-size: 14px;
+	}
+
+}
+
+@media screen and (max-width: 575px) {
+	h1 {
+		font-size: 30px;
+	}
+	h3 {
+		font-size: 20px;
+	}
+	h4 {
+		font-size: 16px;
+	}
+	h5 {
+		font-size: 12px;
+	}
+	#currentDay img {
+		height: 80px;
+		width: 80px;
+	}
+	
+	img {
+		width: 75px;
+		height: 75px;
+	}
+
+	.forecast div {
+		font-size: 10px;
+	}
+
+	.btn{
+		font-size: 12px;
+		padding: 3px 7px;
+	}
+
+	input[type="text"] {
+		font-size: 12px;
+	}
+
+	#searchInput {
+		height: 25.6px;
+	}
+
+	#searchCol {
+		top: 30.5px;
+		width: 150px;
+	}
+	
+	.del {
+		position:absolute;
+		top:-2.5%;
+		right:-2.5%;
+		padding: 0 0 0 0;
+		width: 15%;
+	}
+
+	.searchCol, #currentDay, .forecast, header {
+		padding: 25px;
+		overflow-x: hidden; /* For Opera */
+		-webkit-box-shadow:
+		inset #19d4ff 0 0 0 3px,
+		inset #18cdf7 0 0 0 1px,
+		inset #53dfff 0 0 0 6px,
+		inset #50d8f7 0 0 0 7px,
+		inset #8ce9ff 0 0 0 9px,
+		inset #88e2f7 0 0 0 10px,
+		inset #c5f4ff 0 0 0 12px,
+		inset #bfecf7 0 0 0 13px;
+		-moz-box-shadow:
+		inset #19d4ff 0 0 0 3px,
+		inset #18cdf7 0 0 0 1px,
+		inset #53dfff 0 0 0 6px,
+		inset #50d8f7 0 0 0 7px,
+		inset #8ce9ff 0 0 0 9px,
+		inset #88e2f7 0 0 0 10px,
+		inset #c5f4ff 0 0 0 12px,
+		inset #bfecf7 0 0 0 13px;
+		box-shadow:
+		inset #19d4ff 0 0 0 3px,
+		inset #18cdf7 0 0 0 1px,
+		inset #53dfff 0 0 0 6px,
+		inset #50d8f7 0 0 0 7px,
+		inset #8ce9ff 0 0 0 9px,
+		inset #88e2f7 0 0 0 10px,
+		inset #c5f4ff 0 0 0 12px,
+		inset #bfecf7 0 0 0 13px;
+	}
+
+	footer {
+		font-size: 12px;
+	}
+
+}
+
+@media screen and (max-width: 430px) {
+	h1 {
+		font-size: 20px;
+	}
+	h3 {
+		font-size: 16px;
+	}
+	h4 {
+		font-size: 12px;
+	}
+	h5 {
+		font-size: 10px;
+	}
+	#currentDay img {
+		height: 65px;
+		width: 65px;
+	}
+	
+	img {
+		width: 55px;
+		height: 55px;
+	}
+
+	.forecast div {
+		font-size: 6px;
+	}
+
+	.btn {
+		font-size: 10px;
+		padding: 2px 5px;
+	}
+
+	#searchInput {
+		height: 20.4px;
+		width: 90px;
+	}
+
+	input[type="text"] {
+		font-size: 10px;
+	}
+
+	#searchCol {
+		top: 26px;
+		width:125px;
+	}
+	
+	.del {
+		position:absolute;
+		top:-3%;
+		right:-3%;
+		padding: 0 0 0 0;
+		width: 15%;
+	}
+
+	.searchCol, #currentDay, .forecast, header {
+		padding: 17.5px;
+		overflow-x: hidden; /* For Opera */
+		-webkit-box-shadow:
+		inset #19d4ff 0 0 0 3px,
+		inset #18cdf7 0 0 0 1px,
+		inset #53dfff 0 0 0 6px,
+		inset #50d8f7 0 0 0 7px,
+		inset #8ce9ff 0 0 0 9px,
+		inset #88e2f7 0 0 0 10px,
+		inset #c5f4ff 0 0 0 12px,
+		inset #bfecf7 0 0 0 13px;
+		-moz-box-shadow:
+		inset #19d4ff 0 0 0 3px,
+		inset #18cdf7 0 0 0 1px,
+		inset #53dfff 0 0 0 6px,
+		inset #50d8f7 0 0 0 7px,
+		inset #8ce9ff 0 0 0 9px,
+		inset #88e2f7 0 0 0 10px,
+		inset #c5f4ff 0 0 0 12px,
+		inset #bfecf7 0 0 0 13px;
+		box-shadow:
+		inset #19d4ff 0 0 0 3px,
+		inset #18cdf7 0 0 0 1px,
+		inset #53dfff 0 0 0 6px,
+		inset #50d8f7 0 0 0 7px,
+		inset #8ce9ff 0 0 0 9px,
+		inset #88e2f7 0 0 0 10px,
+		inset #c5f4ff 0 0 0 12px,
+		inset #bfecf7 0 0 0 13px;
+	}
+
+	footer {
+		font-size: 10px;
+	}
+
+}

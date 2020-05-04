@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!--Google fonts-->
+	<link href="https://fonts.googleapis.com/css2?family=Baloo+Tammudu+2&family=Open+Sans:wght@700&family=Source+Code+Pro:wght@300&display=swap"
+		rel="stylesheet">
+	<!-- CSS Reset -->
+	<link rel="stylesheet" href="assets/css/reset.css" type="text/css">
+	<!--Bootstrap CSS-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<!--Animate.CSS-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+	<!--Fontawesome CSS-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+		integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	<!--Local CSS-->
+	<link rel="stylesheet" href="assets/css/style.css" type="text/css">
+	<!--jQuery-->
+	<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+  	<!--moment.js-->
+	<script src="https://momentjs.com/downloads/moment.js"></script>
+	<!--Bootstrap js-->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+		crossorigin="anonymous"></script>
+	<!--Local js-->
+	<script src="assets/js/script.js"></script>
+	<link href="assets/images/favicon.ico" rel="icon" type="image/x-icon">
+	<title>Weather Dashboard</title>
+</head>
+
+<body>
+
+	<header class="container-fluid text-center">
+
+		<h1>Weather Dashboard</h1>
+
+	</header>
+
+	<main class="container-fluid">
+		
+		<!-- JavaScript appends current weather data elements to this row. -->
+		<div class="row align-items-center justify-content-center" id="currentDay">
+
+		</div>
+
+		<!-- JavaScript appends 5-day forecast weather data elements to this row. -->
+		<div class="row" id="fiveDay">
+
+		</div>
+		
+	</main>
+
+	<!-- Collapsing search and history sectio.n -->
+	<aside>
+
+		<button id="toggleBtn" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#searchCol" aria-expanded="false" aria-controls="searchCol">
+			Search
+		</button>
+
+		<div class="row searchCol collapse" id="searchCol">
+
+			<div class="row">
+
+				<h4 id='searchHeader'>Search</h4>
+				
+				<div class="input-group">
+
+					<input id="searchInput" type="text" class="form-control" placeholder="City">
+
+					<div class="input-group-append">
+
+						<button class="btn searchBtn btn-outline-secondary" type="button" id="searchBtn">
+							<i class="fas fa-search"></i>
+						</button>	
+
+					</div>
+
+				</div>		
+
+			</div>
+			
+			<div class='container history'>
+
+			</div>
+
+		</div>
+
+	</aside>
+
+	<!-- Just footer things. -->
+	<footer>
+
+		Weather data provided by <a href="https://openweathermap.org/">openweathermap.org</a>
+
+	</footer>
+
+</body>
+
+</html>
