@@ -143,7 +143,7 @@ $(document).ready(function () {
 				<h5>
 
 				<h5>
-					Temperature: ${currentWeatherData.main.temp} F
+					Temperature: ${Math.round(currentWeatherData.main.temp)} F
 				</h5>
 
 				<h5>	
@@ -201,11 +201,11 @@ $(document).ready(function () {
 					</div>
 
 					<div class='animated fadeIn row high'>
-						${oneCallData.daily[i].temp.max} °F
+						${Math.round(oneCallData.daily[i].temp.max)} °F
 					</div>
 
 					<div class='animated fadeIn row low'>
-						${oneCallData.daily[i].temp.min} °F
+						${Math.round(oneCallData.daily[i].temp.min)} °F
 					</div>
 
 					<div class='animated fadeIn row'>
