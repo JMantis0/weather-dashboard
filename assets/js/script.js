@@ -139,7 +139,7 @@ $(document).ready(function () {
 				</h3>
 
 				<h5>
-					(${moment().utc().add(currentWeatherData.timezone, "s").format("dddd M/D/YY h:mm)")}
+					${moment().utc().add(currentWeatherData.timezone, "s").format("dddd M/D/YY h:mm a")}
 				<h5>
 
 				<h5>
