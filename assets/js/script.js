@@ -41,6 +41,7 @@ $(document).ready(function () {
 		$(".histBtn").off();
 		cityInput.off();
 		$(".del").off();
+		searchBtn.off();
 
 		$(".histBtn").click(callbackCoordinates);
 		searchBtn.click(callbackCoordinates);
@@ -94,7 +95,7 @@ $(document).ready(function () {
 
 		}).then(function(currentWeatherData) {
 
-
+			console.log(currentWeatherData)
 			//  Assign data attributes to history button for latitude and longitude
 			//  Append to history section in HTML
 			if(!$(".histBtn").hasClass(currentWeatherData.name)) {
@@ -122,13 +123,14 @@ $(document).ready(function () {
 	//  New divs are created with jQuery, populated with data, and rendered to HTML.
 	function callbackOneCallAPI(currentWeatherData) {
 
+		
 		$.ajax({
 
 			url: `https://api.openweathermap.org/data/2.5/onecall?lat=${currentWeatherData.coord.lat}&lon=${currentWeatherData.coord.lon}&exclude=hourly&appid=${apiKey}&units=imperial`,
 			method: "GET"
 
 		}).then(function(oneCallData) {
-			
+			console.log(oneCallData)
 			$('.added').remove();			
 
 			//  insert currentWeatherData
