@@ -95,7 +95,6 @@ $(document).ready(function () {
 
 		}).then(function(currentWeatherData) {
 
-			console.log(currentWeatherData)
 			//  Assign data attributes to history button for latitude and longitude
 			//  Append to history section in HTML
 			if(!$(".histBtn").hasClass(currentWeatherData.name)) {
@@ -130,7 +129,7 @@ $(document).ready(function () {
 			method: "GET"
 
 		}).then(function(oneCallData) {
-			console.log(oneCallData)
+
 			$('.added').remove();			
 
 			//  insert currentWeatherData
