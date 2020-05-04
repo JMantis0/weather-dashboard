@@ -188,7 +188,7 @@ $(document).ready(function () {
 			</div>`).appendTo(currentDay);
 
 			//  Add 5 day forecast data to HTML
-			for(let i=0; i < 5; i++) {				
+			for(let i=1; i < 6; i++) {				
 				
 				$(`<div class='col forecast added'>
 
