@@ -7,6 +7,7 @@
 	<!--Google fonts-->
 	<link href="https://fonts.googleapis.com/css2?family=Baloo+Tammudu+2&family=Open+Sans:wght@700&family=Source+Code+Pro:wght@300&display=swap"
 		rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Nova+Square&display=swap" rel="stylesheet">
 	<!-- CSS Reset -->
 	<link rel="stylesheet" href="assets/css/reset.css" type="text/css">
 	<!--Bootstrap CSS-->
@@ -35,11 +36,59 @@
 
 <body>
 
-	<header class="container-fluid text-center">
+	<header class="container-fluid">
 
-		<h1>Weather Dashboard</h1>
+		<div class='row justify-content-center'>
+
+			<div class='outline row self-align-center'>
+
+				<h1 class='inline'>WEATHER DASHBOARD</h1>
+				
+				<button id="toggleBtn" class="btn btn-primary col" type="button" data-toggle="collapse" data-target="#searchCol" aria-expanded="false" aria-controls="searchCol">> Search Weather <</button>
+			
+			</div>
+
+		</div>
 
 	</header>
+
+	<aside class='container-fluid'>
+
+		<div class="searchCol collapse" id="searchCol">
+
+			<div class='row justify-content-center'>
+
+					
+				<h4 class='col-md-3 col-sm-3' class id='searchHeader'>Search</h4>
+
+				
+				<div class='col-md-auto col-sm-auto'>
+
+					<div class="input-group mb-3">
+
+						<input id="searchInput" type="text" class="form-control" placeholder="City">
+
+						<div class="input-group-append">	
+
+							<button class="btn searchBtn btn-outline-secondary" type="button" id="searchBtn">
+								<i class="fas fa-search"></i>
+							</button>
+
+						</div>
+
+					</div>	
+				
+				</div>
+
+			</div>	
+
+			<div class='history row'>
+
+			</div>
+
+		</div>
+
+	</aside>
 
 	<main class="container-fluid">
 		
@@ -54,43 +103,6 @@
 		</div>
 		
 	</main>
-
-	<!-- Collapsing search and history sectio.n -->
-	<aside>
-
-		<button id="toggleBtn" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#searchCol" aria-expanded="false" aria-controls="searchCol">
-			Search
-		</button>
-
-		<div class="row searchCol collapse" id="searchCol">
-
-			<div class="row">
-
-				<h4 id='searchHeader'>Search</h4>
-				
-				<div class="input-group">
-
-					<input id="searchInput" type="text" class="form-control" placeholder="City">
-
-					<div class="input-group-append">
-
-						<button class="btn searchBtn btn-outline-secondary" type="button" id="searchBtn">
-							<i class="fas fa-search"></i>
-						</button>	
-
-					</div>
-
-				</div>		
-
-			</div>
-			
-			<div class='container history'>
-
-			</div>
-
-		</div>
-
-	</aside>
 
 	<!-- Just footer things. -->
 	<footer>

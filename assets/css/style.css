@@ -8,40 +8,133 @@ body {
 }
 
 header {
-	background-color: #18cdf7;;
-	vertical-align: center;
+	background-color: #18cdf7;
 }
 
-#searchHeader {
-	margin-left:15px;
+
+
+h1 {
+	background-color:#18cdf7;
+	padding:5px 60px 5px 30px;
+	border-radius:30px;
+	text-align: left;
+	margin:0;
+	font-size: 39px;
+}
+
+
+
+.outline {
+	background-color: rgb(181, 239, 255);
+	padding:15px;
+	border-radius:50px;
+	width: 75%;
+	min-width: 408px;
+	max-height: 160.5px;
+}
+
+.inline {
+	display: inline-block;
+	width: 290px;
+}
+
+#toggleBtn {
+	border-radius:30px;
+	margin-left: 30px;
+	margin-right: 20px;
+	height: 50px;
+	margin-top: 30px;
+	background-color: rgb(53, 90, 175);	
+}
+
+
+h3, h4{
+	background-color: rgb(181, 239, 255);
+	padding: 5px 45px;
+	border-radius:20px;
+	text-align: center;
+	align-items: center;
+}
+
+
+
+h4 {
+	margin-bottom:15px;
+
 }
 
 #searchBtn {
-	background-color: white;
-	
+	background-color: white;	
 }
 
+#searchInput{
+	border: 1px gray solid;
+}
+
+
 .histBtn {
-	width: 100%;
-	text-align: left;
 	position: relative;
+	text-align: left;
 	margin-top: 5px;
+	color: white;
+	background-color: rgb(53, 90, 175);
+	display:inline-block;
+	width:100%
+}
+
+.center {
+	text-align:center;
+	align-items:center;
+}
+
+.time {
+	
+	background-color: rgb(181, 239, 255);
+	padding: 5px 45px;
+	border-radius:20px;
+	text-align: center;
+	align-items: center;
+}
+.wind {
+	
+	background-color: rgb(235, 235, 235);
+	padding: 5px 45px;
+	border-radius:20px;
+	text-align: center;
+	align-items: center;
+}
+
+.burn {
+	background-color: rgb(255, 192, 110);
+	padding: 5px 20px;
+	border-radius:20px;
+	align-items:center;
+	text-align:center;
+	
+	
 }
 
 .del {
 	position:absolute;
-	top:-1%;
-	right:-1%;
+	top: 0px;
+	right: 0px;
 	padding: 0 0 0 0;
-	width: 15%;
+	width: 20px;
+	height: 20px;
+	display: inline-flex;
+	align-items: center;
 }
 
-#currentDay img {
+
+#currentIcon, #currentIcon img {
+	display: relative;
+	bottom: 25px;
+	right: 20px;
 	width: 150px;
 	height: 150px;
 }
 
-.searchCol, #currentDay, .forecast, header {
+#searchCol, #currentDay, .forecast, header {
 	padding: 40px;
 	overflow-x: hidden; /* For Opera */
 	-webkit-box-shadow:
@@ -71,12 +164,10 @@ header {
 	inset #88e2f7 0 0 0 17px,
 	inset #c5f4ff 0 0 0 22px,
 	inset #bfecf7 0 0 0 23px;
-	background-color:#18cdf7;
 }
 
 .forecast {
-	padding-left: 3px;
-	padding-right: 3px;
+	padding: 0px;
 }
 
 #uvBlurb {
@@ -91,7 +182,6 @@ header {
 
 .moderateUV {
 	background-color: rgb(255, 255, 4);
-
 }
 
 .highUV {
@@ -106,6 +196,21 @@ header {
 	background-color: rgb(255, 38, 255)
 }
 
+.forecast h4 {
+	position: relative;
+	top: 40px;
+}
+
+.forecast img  {
+	width: 150px;
+	position: relative;
+}
+
+.forecast .high, .forecast .low, .forecast .humi {
+	position: relative;
+	bottom: 30px;
+}
+
 .forecast > * {
 	margin:0 auto;
 	align-items: center;
@@ -113,32 +218,53 @@ header {
 	color:black;
 }
 
+.forecast .col {
+	margin-bottom: 50px;
+}
+
 .low {
+	font-size: 26px;
 	color: blue;
 }
 
+.low p, .row .low {
+	padding: 0 10px;
+	border-radius: 30px;
+	background-color: white;
+}
+
+
+.humi {
+	font-size: 26px;
+	text-align: center;
+	align-items: center;
+}
+
+.humi p {
+	padding: 0 10px;
+	border-radius: 30px;
+	background-color: rgb(167, 235, 250);
+	
+}
+
+.high p, .row .high {
+	background-color: rgb(255, 232, 236);;
+	padding: 0 10px;
+	border-radius: 30px;
+}
+
 .high {
+	font-size: 26px;
 	color:red;
 }
 
 .fa-tint {
-	margin-top: 3px;
-}
-
-#toggleBtn {
-	position: fixed;
-	top:5px;
-	right:5px;
-	z-index: 3;
+	position: relative;
+	top: 2px;
 }
 
 #searchCol {
 	background-color:white;
-	position: fixed;
-	right:20px;
-	top: 43px;
-	z-index: 300;
-	width:250px;
 }
 
 footer {
@@ -152,292 +278,67 @@ a {
 	color:red;
 }
 
-@media screen and (max-width: 768px) {
-	h1 {
-		font-size: 35px;
-	}
-	h3 {
-		font-size: 24px;
-	}
-	h4 {
-		font-size: 20px;
-	}
-	h5 {
-		font-size: 14px;
-	}
-	#currentDay img {
-		height: 90px;
-		width: 90px;
-	}
+@media screen and (max-width: 732px) {
 	
-	img {
-		width: 82.5px;
-		height: 82.5px;
+	#toggleBtn {
+		margin:5px;
+		height:30px;
+		padding-top:0px;
+		
 	}
 
-	.forecast div {
-		font-size: 12px;
-		font-weight: 600;
+	.inline {
+		width:100%;
 	}
 
-	.btn{
-		font-size: 14px;
-		padding: 4px 9px;
-	}
-
-	input[type="text"] {
-		font-size: 14px;
-	}
-
-	#searchInput {
-		height: 30.8px;
-	}
-
-	#searchCol {
-		top: 36px;
-		width:200px;
-	}
-	
-	.del {
-		position:absolute;
-		top:-2%;
-		right:-2%;
-		padding: 0 0 0 0;
-		width: 15%;
-	}
-
-	.searchCol, #currentDay, .forecast, header {
-		padding: 30px;
-		overflow-x: hidden; /* For Opera */
-		-webkit-box-shadow:
-		inset #19d4ff 0 0 0 4px,
-		inset #18cdf7 0 0 0 1px,
-		inset #53dfff 0 0 0 8px,
-		inset #50d8f7 0 0 0 9px,
-		inset #8ce9ff 0 0 0 12px,
-		inset #88e2f7 0 0 0 13px,
-		inset #c5f4ff 0 0 0 16px,
-		inset #bfecf7 0 0 0 17px;
-		-moz-box-shadow:
-		inset #19d4ff 0 0 0 4px,
-		inset #18cdf7 0 0 0 1px,
-		inset #53dfff 0 0 0 8px,
-		inset #50d8f7 0 0 0 9px,
-		inset #8ce9ff 0 0 0 12px,
-		inset #88e2f7 0 0 0 13px,
-		inset #c5f4ff 0 0 0 16px,
-		inset #bfecf7 0 0 0 17px;
-		box-shadow:
-		inset #19d4ff 0 0 0 4px,
-		inset #18cdf7 0 0 0 1px,
-		inset #53dfff 0 0 0 8px,
-		inset #50d8f7 0 0 0 9px,
-		inset #8ce9ff 0 0 0 12px,
-		inset #88e2f7 0 0 0 13px,
-		inset #c5f4ff 0 0 0 16px,
-		inset #bfecf7 0 0 0 17px;
-	}
-
-	.forecast {
-		padding-left: 3px;
-		padding-right: 3px;
-	}
-
-	footer {
-		font-size: 14px;
+	.outline {
+		padding-bottom: 60px;
 	}
 
 }
 
-@media screen and (max-width: 575px) {
-	h1 {
-		font-size: 30px;
-	}
-	h3 {
-		font-size: 20px;
-	}
-	h4 {
-		font-size: 16px;
-	}
-	h5 {
-		font-size: 12px;
-	}
-	#currentDay img {
-		height: 80px;
-		width: 80px;
-	}
-	
-	img {
-		width: 75px;
-		height: 75px;
-	}
-
-	.forecast div {
-		font-size: 10px;
-	}
-
-	.btn{
-		font-size: 12px;
-		padding: 3px 7px;
-	}
-
-	input[type="text"] {
-		font-size: 12px;
-	}
-
-	#searchInput {
-		height: 25.6px;
-	}
-
-	#searchCol {
-		top: 30.5px;
-		width: 150px;
-	}
-	
-	.del {
-		position:absolute;
-		top:-2.5%;
-		right:-2.5%;
-		padding: 0 0 0 0;
-		width: 15%;
-	}
-
-	.searchCol, #currentDay, .forecast, header {
-		padding: 25px;
-		overflow-x: hidden; /* For Opera */
-		-webkit-box-shadow:
-		inset #19d4ff 0 0 0 3px,
-		inset #18cdf7 0 0 0 1px,
-		inset #53dfff 0 0 0 6px,
-		inset #50d8f7 0 0 0 7px,
-		inset #8ce9ff 0 0 0 9px,
-		inset #88e2f7 0 0 0 10px,
-		inset #c5f4ff 0 0 0 12px,
-		inset #bfecf7 0 0 0 13px;
-		-moz-box-shadow:
-		inset #19d4ff 0 0 0 3px,
-		inset #18cdf7 0 0 0 1px,
-		inset #53dfff 0 0 0 6px,
-		inset #50d8f7 0 0 0 7px,
-		inset #8ce9ff 0 0 0 9px,
-		inset #88e2f7 0 0 0 10px,
-		inset #c5f4ff 0 0 0 12px,
-		inset #bfecf7 0 0 0 13px;
-		box-shadow:
-		inset #19d4ff 0 0 0 3px,
-		inset #18cdf7 0 0 0 1px,
-		inset #53dfff 0 0 0 6px,
-		inset #50d8f7 0 0 0 7px,
-		inset #8ce9ff 0 0 0 9px,
-		inset #88e2f7 0 0 0 10px,
-		inset #c5f4ff 0 0 0 12px,
-		inset #bfecf7 0 0 0 13px;
-	}
-
-	.forecast {
-		padding-left: 3px;
-		padding-right: 3px;
-	}
-
-	footer {
-		font-size: 12px;
-	}
+@media screen and (max-width: 510px) {
+/* 
+	.outline {
+		width: 75%;
+		min-width:0px;
+	} */
 
 }
 
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 510px) {
+
 	h1 {
-		font-size: 20px;
+		min-width:300px;
+		min-height: 100px
 	}
-	h3 {
-		font-size: 16px;
+	.outline { 
+		min-width: 330px;
+		min-height: 150px;
 	}
+}
+
+@media screen and (max-width: 400px) {
+
+	h5{
+		font-size: 24 px;
+		
+	}
+
 	h4 {
-		font-size: 12px;
-	}
-	h5 {
-		font-size: 10px;
-	}
-	#currentDay img {
-		height: 65px;
-		width: 65px;
-	}
-	
-	img {
-		width: 55px;
-		height: 55px;
+		font-size: 18px;
 	}
 
-	.forecast div {
-		font-size: 6px;
+	.ib .high {
+		margin-left: 20px;
 	}
 
-	.btn {
-		font-size: 10px;
-		padding: 2px 5px;
+	.row.ib {
+		width:100%;
 	}
 
-	#searchInput {
-		height: 20.4px;
-		width: 90px;
-	}
-
-	input[type="text"] {
-		font-size: 10px;
-	}
-
-	#searchCol {
-		top: 26px;
-		width:125px;
-	}
-	
-	.del {
-		position:absolute;
-		top:-3%;
-		right:-3%;
-		padding: 0 0 0 0;
-		width: 15%;
-	}
-
-	.searchCol, #currentDay, .forecast, header {
-		padding: 17.5px;
-		overflow-x: hidden; /* For Opera */
-		-webkit-box-shadow:
-		inset #19d4ff 0 0 0 3px,
-		inset #18cdf7 0 0 0 1px,
-		inset #53dfff 0 0 0 6px,
-		inset #50d8f7 0 0 0 7px,
-		inset #8ce9ff 0 0 0 9px,
-		inset #88e2f7 0 0 0 10px,
-		inset #c5f4ff 0 0 0 12px,
-		inset #bfecf7 0 0 0 13px;
-		-moz-box-shadow:
-		inset #19d4ff 0 0 0 3px,
-		inset #18cdf7 0 0 0 1px,
-		inset #53dfff 0 0 0 6px,
-		inset #50d8f7 0 0 0 7px,
-		inset #8ce9ff 0 0 0 9px,
-		inset #88e2f7 0 0 0 10px,
-		inset #c5f4ff 0 0 0 12px,
-		inset #bfecf7 0 0 0 13px;
-		box-shadow:
-		inset #19d4ff 0 0 0 3px,
-		inset #18cdf7 0 0 0 1px,
-		inset #53dfff 0 0 0 6px,
-		inset #50d8f7 0 0 0 7px,
-		inset #8ce9ff 0 0 0 9px,
-		inset #88e2f7 0 0 0 10px,
-		inset #c5f4ff 0 0 0 12px,
-		inset #bfecf7 0 0 0 13px;
-	}
-
-	.forecast {
-		padding-left: 3px;
-		padding-right: 3px;
-	}
-
-	footer {
-		font-size: 10px;
+	p, #currentDay .high, #currentDay .low {
+		font-size:16px;
 	}
 
 }

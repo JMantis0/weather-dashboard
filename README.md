@@ -1,4 +1,7 @@
-# WeatherVane
+
+![header](assets/images/header.jpg)
+
+# Weather Dashboard
 
 A Web Application offering current weather data and 5-day forecasts for cities worldwide.
 
@@ -25,7 +28,7 @@ Searches are saved, stored, and rendered into buttons in your search history tha
 
  Application utilizes the Bootstrap CSS Framework to be fully functional across browser sizes and mobile devices.
 
- ![mobile](assets/images/weathervane-mobile.PNG)
+ ![mobile](assets/images/weathervane-mobile.gif)
 
  ## -Contributors-
 

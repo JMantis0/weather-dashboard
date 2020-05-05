@@ -7,7 +7,34 @@ $(document).ready(function () {
 	let currentDay = $("#currentDay")
 	let fiveDay = $("#fiveDay");
 	let apiKey = "9c651b783881ed4ccbd7fb3242a0070e";
-	let storedSearches = []
+	let storedSearches = [];
+	let observer = new MutationObserver(callback);
+	observer.observe($("#toggleBtn")[0], {attributes:true});
+	
+	function callback(mutations) {
+
+		for(let mutation of mutations) {
+
+			if (mutation.type === 'attributes') {
+				console.log("Togglebutton Attribute Mutation Detected")
+
+				if ($("#toggleBtn").attr("aria-expanded") == "false") {
+
+					$("#toggleBtn").text("> Search Weather <");
+
+				}
+				else if ($("#toggleBtn").attr("aria-expanded") == "true") {
+
+					$("#toggleBtn").text("Close Search");
+
+				}
+
+			}
+
+		}
+		
+	}
+	
 	
 	//  Function initialize is called on page open or refresh.
 	//  Renders list of history buttons from localStorage.
@@ -19,12 +46,12 @@ $(document).ready(function () {
 
 			for(let i = 0; i < storedSearches.length; i++) {
 
-				let newRow = $(`<div class='row histRow'></div>`)
+				let newCol = $(`<div class='col-md-3 col-sm-4 col-6 histCol'></div>`)
 				let histBtn = $(`<button class='btn btn-outline-secondary histBtn ${storedSearches[i]}' id='${storedSearches[i]}' type='button'>${storedSearches[i]}</button>`);
 				let delBtn = $(`<span class="btn del">&times;</span>`);
-				newRow.append(histBtn);
+				newCol.append(histBtn);
 				histBtn.append(delBtn);
-				history.prepend(newRow);
+				history.prepend(newCol);
 
 			}
 			
@@ -42,6 +69,7 @@ $(document).ready(function () {
 		cityInput.off();
 		$(".del").off();
 		searchBtn.off();
+		$("#toggleBtn").off();
 
 		$(".histBtn").click(callbackCoordinates);
 		searchBtn.click(callbackCoordinates);
@@ -51,7 +79,7 @@ $(document).ready(function () {
 			event.stopPropagation();
 			storedSearches = storedSearches.filter(item => item !== $(this).parents(".histBtn").attr("id"));
 			localStorage.setItem("searches", JSON.stringify(storedSearches));
-			$(this).parents(".histRow").remove();
+			$(this).parents(".history .histCol").remove();
 			
 		});		
 
@@ -64,7 +92,6 @@ $(document).ready(function () {
 			}
 
 		});
-
 
 	}
 
@@ -101,12 +128,12 @@ $(document).ready(function () {
 
 				storedSearches.push(currentWeatherData.name);
 				localStorage.setItem("searches", JSON.stringify(storedSearches));	
-				let newRow = $(`<div class='row histRow'></div>`);
-				let histBtn = $(`<button class='btn btn-outline-secondary histBtn ${currentWeatherData.name}' id='${currentWeatherData.name}' type='button'>${currentWeatherData.name}</button>`);
+				let newCol = $(`<div class='col-md-3 col-sm-4 col-6 histCol'></div>`);
+				let histBtn = $(`<button class='btn btn-outline-secondary histBtn inline ${currentWeatherData.name}' id='${currentWeatherData.name}' type='button'>${currentWeatherData.name}</button>`);
 				let delBtn = $(`<span class="btn del">&times;</span>`);
-				newRow.append(histBtn);
+				newCol.append(histBtn);
 				histBtn.append(delBtn);
-				history.prepend(newRow);
+				history.prepend(newCol);
 
 			}
 			else {
@@ -115,10 +142,10 @@ $(document).ready(function () {
 				storedSearches.push(currentWeatherData.name);	
 				localStorage.setItem("searches", JSON.stringify(storedSearches));
 				let existingBtn = $(`[id ='${currentWeatherData.name}']`);
-				existingBtn.parents(".histRow").remove();
-				let newRow = $(`<div class='row histRow'></div>`);
-				newRow.append(existingBtn);
-				history.prepend(newRow);
+				existingBtn.parents(".histCol").remove();
+				let newCol = $(`<div class='col-md-3 col-sm-4  col-6 histCol'></div>`);
+				newCol.append(existingBtn);
+				history.prepend(newCol);
 			}
 
 			callbackOneCallAPI(currentWeatherData);
@@ -139,40 +166,41 @@ $(document).ready(function () {
 			method: "GET"
 
 		}).then(function(oneCallData) {
-
+			console.log(currentWeatherData)
+			console.log(oneCallData)
 			$('.added').remove();			
 
 			//  insert currentWeatherData
-			$(`<div class='col-auto added animated fadeIn' id='currentCol'>
-		
-				<h3>
-					${currentWeatherData.name} 
+			$(`<div class='added col-3><div class='col-sm-8 added animated fadeIn' id='currentCol'>
+			
+				<h3 class='row'>
+					${currentWeatherData.name} Today
 				</h3>
 
 				<h5>
-					${moment().utc().add(currentWeatherData.timezone, "s").format("dddd M/D/YY h:mm a")}
+					<p class='row time'>${moment().utc().add(currentWeatherData.timezone, "s").format("dddd M/D/YY h:mm a")}</p>
 				<h5>
 
-				<h5>
-					Temperature: ${Math.round(currentWeatherData.main.temp)} F
+				<h5 class='row'>
+					 <div class='col high'>High: ${Math.round(oneCallData.daily[0].temp.max)} °F</div> <div class='col low'>Low: ${Math.round(oneCallData.daily[0].temp.min)} °F</div>
 				</h5>
 
-				<h5>	
-					Humidity: ${currentWeatherData.main.humidity}%
+				<h5 class='humi center'>	
+					<p class='row justify-content-center'><i class="fas fa-tint low"></i>Humidity: ${currentWeatherData.main.humidity}%</p>
 				</h5>
 
 				<h5>
-					Wind Speed: ${currentWeatherData.wind.speed} MPH
+					<p class='row wind'>Wind Speed: ${currentWeatherData.wind.speed} MPH</p>
 				</h5>
 
 				<h5 id='uvIndex'>
-					UV Index: 
+					<p class='row justify-content-center burn'>UV Index:</p> 
 				</h5>
 
 			</div>`).appendTo(currentDay);
 		
 			// Insert UV data.
-			$(`<div id ='uvBlurb' style='display: inline;' >${oneCallData.current.uvi}</div>`).appendTo($("#uvIndex"));
+			$(`<div id ='uvBlurb' style='display: inline;' >${oneCallData.current.uvi}</div>`).appendTo($(".burn"));
 
 			//  Color uvBlurb according to UV Risk.
 			let uvBlurb = $("#uvBlurb");		
@@ -194,14 +222,14 @@ $(document).ready(function () {
 			}
 
 			//  Insert currentWeatherData Icon 
-			$(`<div id='currentIcon' class='added col-auto animated fadeIn'>
+			$(`<div id='currentIcon' class='added col-md-2 animated fadeIn'>
 				<img  src=` + "https://openweathermap.org/img/wn/" + `${currentWeatherData.weather[0].icon}@2x.png>
 			</div>`).appendTo(currentDay);
 
 			//  Add 5 day forecast data to HTML
 			for(let i=1; i < 6; i++) {				
 				
-				$(`<div class='col forecast added'>
+				$(`<div class='col-lg col-md-4 col-sm-6 col-6 forecast added'>
 
 					<div class='animated fadeIn row'>
 						<h4>${moment.unix(oneCallData.daily[i].dt).format("dd M-D")}</h4>
@@ -211,19 +239,26 @@ $(document).ready(function () {
 						<img src=` + "https://openweathermap.org/img/wn/" + `${oneCallData.daily[i].weather[0].icon}@2x.png>
 					</div>
 
-					<div class='animated fadeIn row high'>
-						${Math.round(oneCallData.daily[i].temp.max)} °F
-					</div>
-
-					<div class='animated fadeIn row low'>
-						${Math.round(oneCallData.daily[i].temp.min)} °F
+					<div class='animated fadeIn row'>
+						<p class='high'>${Math.round(oneCallData.daily[i].temp.max)} °F</p>
 					</div>
 
 					<div class='animated fadeIn row'>
-						<i class="fas fa-tint low"></i>&nbsp${oneCallData.daily[i].humidity} %
+						<p class='low'>${Math.round(oneCallData.daily[i].temp.min)} °F</p>
+					</div>
+
+					<div class='animated fadeIn row humi'>
+						<p><i class="fas fa-tint low"></i>&nbsp${oneCallData.daily[i].humidity} %</p>
 					</div>
 
 				</div>`).appendTo(fiveDay);
+
+				if(i == 4) {
+					$(".forecast:last").addClass("offset-md-2 offset-lg-0")
+				}
+				if(i == 5) {
+					$(".forecast:last").addClass("offset-3 offset-sm-3 offset-md-0 offset-lg-0")
+				}
 
 			}
 
