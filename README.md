@@ -3,7 +3,7 @@
 A Web Application offering current weather data and 5-day forecasts for cities worldwide.
 
 
-**[Run Application!](https://jmantis0.github.io/weathervane/)**
+**[Run Application!](https://jmantis0.github.io/weather-dashboard/)**
 
 ![dashboard](assets/images/weathervane-dashboard.gif)
 
