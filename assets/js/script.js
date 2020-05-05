@@ -171,7 +171,7 @@ $(document).ready(function () {
 			$('.added').remove();			
 
 			//  insert currentWeatherData
-			$(`<div class='added col-3><div class='col-sm-8 added animated fadeIn' id='currentCol'>
+			$(`<div class='added animated fadeIn col-3><div class='col-sm-8 added animated fadeIn' id='currentCol'>
 			
 				<h3 class='row'>
 					${currentWeatherData.name} Today

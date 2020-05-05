@@ -1,5 +1,5 @@
 
-![header](assets/images/header.jpg)
+![header](assets/images/header.JPG)
 
 # Weather Dashboard
 
