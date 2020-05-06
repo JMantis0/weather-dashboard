@@ -171,54 +171,88 @@ $(document).ready(function () {
 			$('.added').remove();			
 
 			//  insert currentWeatherData
-			$(`<div class='added animated fadeIn col-3><div class='col-sm-8 added animated fadeIn' id='currentCol'>
+			$(`<div class='col-auto added animated fadeIn' id='currentCol'>
+				
+				<div class='styleDiv1'>
+
+					<h2>
+						${currentWeatherData.name} Today
+					</h2>
+
+					<h4>
+						${moment().utc().add(currentWeatherData.timezone, "s").format("dddd M/D/YY h:mm a")}
+					</h4>
+
+				</div>
 			
-				<h3 class='row'>
-					${currentWeatherData.name} Today
-				</h3>
+				<div class='styleDiv2'>
 
-				<h5>
-					<p class='row time'>${moment().utc().add(currentWeatherData.timezone, "s").format("dddd M/D/YY h:mm a")}</p>
-				<h5>
+					<h4 class='row'>
 
-				<h5 class='row'>
-					 <div class='col high'>High: ${Math.round(oneCallData.daily[0].temp.max)} °F</div> <div class='col low'>Low: ${Math.round(oneCallData.daily[0].temp.min)} °F</div>
-				</h5>
+						<div class='title col-auto'>Temperature:</div>
+						<div class='value col'> ${Math.round(currentWeatherData.main.temp)}</div>
+						<div class='uom col-auto'>°F</div>
+						
+					</h4>
 
-				<h5 class='humi center'>	
-					<p class='row justify-content-center'><i class="fas fa-tint low"></i>Humidity: ${currentWeatherData.main.humidity}%</p>
-				</h5>
+					<h4 class='row'>
 
-				<h5>
-					<p class='row wind'>Wind Speed: ${currentWeatherData.wind.speed} MPH</p>
-				</h5>
+						<div class='title col-auto'>Humidity:</div>
+						<div class='value col'>${currentWeatherData.main.humidity}</div>
+						<div class='uom col-auto'>%</div>
 
-				<h5 id='uvIndex'>
-					<p class='row justify-content-center burn'>UV Index:</p> 
-				</h5>
+					</h4>
+
+					<h4 class='row'>
+
+						<div class='title col-auto'>Wind Speed:</div>
+						<div class='value col'> ${currentWeatherData.wind.speed}</div>
+						<div class='uom col-auto'>MPH</div>
+
+					</h4>
+
+				</div>
+
+				<div class='styleDiv3'>
+
+					<h4 class='row uvrow align-items-center'>
+
+						<div class='col-auto'>UV Index:</div> 
+						<div class='col blurbHolder'></div>
+
+					</h4>
+
+				</div>
 
 			</div>`).appendTo(currentDay);
-		
+
+				
+			
 			// Insert UV data.
-			$(`<div id ='uvBlurb' style='display: inline;' >${oneCallData.current.uvi}</div>`).appendTo($(".burn"));
+			$(`<div id ='uvBlurb' style='display: inline;' >${oneCallData.current.uvi}</div>`).appendTo($(".blurbHolder"));
 
 			//  Color uvBlurb according to UV Risk.
 			let uvBlurb = $("#uvBlurb");		
 			let uvRisk = oneCallData.current.uvi;
 			if (uvRisk <= 3) {
 				uvBlurb.addClass("lowUV");
+				uvBlurb.parents(".styleDiv3").addClass("outerLowUV");
 			}
 			else if (uvRisk <= 6) {
 				uvBlurb.addClass("moderateUV");
+				uvBlurb.parents(".styleDiv3").addClass("outerModerateUV");
 			}
 			else if (uvRisk <= 8) {
 				uvBlurb.addClass("highUV");
+				uvBlurb.parents(".styleDiv3").addClass("outerHighUV");
 			}
 			else if (uvRisk <=11) {
 				uvBlurb.addClass("veryHighUV");
+				uvBlurb.parents(".styleDiv3").addClass("outerVeryHighUV");
 			}
 			else {
 				uvBlurb.addClass("extremeUV");
+				uvBlurb.parents(".styleDiv3").addClass("OuterExtremeUV");
 			}
 
 			//  Insert currentWeatherData Icon 
@@ -229,10 +263,10 @@ $(document).ready(function () {
 			//  Add 5 day forecast data to HTML
 			for(let i=1; i < 6; i++) {				
 				
-				$(`<div class='col-lg col-md-4 col-sm-6 col-6 forecast added'>
+				$(`<div class='col-lg col-md-4 col-sm-6 col- forecast added'>
 
 					<div class='animated fadeIn row'>
-						<h4>${moment.unix(oneCallData.daily[i].dt).format("dd M-D")}</h4>
+						<h3>${moment.unix(oneCallData.daily[i].dt).format("ddd M-D")}</h3>
 					</div>
 
 					<div class='animated fadeIn row'>
@@ -248,7 +282,7 @@ $(document).ready(function () {
 					</div>
 
 					<div class='animated fadeIn row humi'>
-						<p><i class="fas fa-tint low"></i>&nbsp${oneCallData.daily[i].humidity} %</p>
+						<p><i class="fas fa-tint drop"></i>&nbsp${oneCallData.daily[i].humidity} %</p>
 					</div>
 
 				</div>`).appendTo(fiveDay);
@@ -257,7 +291,7 @@ $(document).ready(function () {
 					$(".forecast:last").addClass("offset-md-2 offset-lg-0")
 				}
 				if(i == 5) {
-					$(".forecast:last").addClass("offset-3 offset-sm-3 offset-md-0 offset-lg-0")
+					$(".forecast:last").addClass("offset-sm-3 offset-md-0 offset-lg-0")
 				}
 
 			}
