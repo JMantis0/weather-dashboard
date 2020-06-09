@@ -16,14 +16,13 @@ $(document).ready(function () {
 		for(let mutation of mutations) {
 
 			if (mutation.type === 'attributes') {
-				console.log("Togglebutton Attribute Mutation Detected")
 
-				if ($("#toggleBtn").attr("aria-expanded") == "false") {
+				if ($("#toggleBtn").attr("aria-expanded") === "false") {
 
 					$("#toggleBtn").text("> Search Weather <");
 
 				}
-				else if ($("#toggleBtn").attr("aria-expanded") == "true") {
+				else if ($("#toggleBtn").attr("aria-expanded") === "true") {
 
 					$("#toggleBtn").text("Close Search");
 
@@ -61,7 +60,7 @@ $(document).ready(function () {
 		history.find(".histBtn").first().click();
 
 	}
-
+	
 	// Function assignListeners assigns event listeners.
 	function assignListeners() {
 
@@ -166,8 +165,6 @@ $(document).ready(function () {
 			method: "GET"
 
 		}).then(function(oneCallData) {
-			console.log(currentWeatherData)
-			console.log(oneCallData)
 			$('.added').remove();			
 
 			//  insert currentWeatherData
@@ -298,7 +295,6 @@ $(document).ready(function () {
 
 			assignListeners();
 			cityInput.val("");
-
 		});
 
 	}

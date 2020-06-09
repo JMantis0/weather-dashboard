@@ -44,7 +44,7 @@
 
 				<h1 class='inline'>WEATHER DASHBOARD</h1>
 				
-				<button id="toggleBtn" class="btn btn-primary col" type="button" data-toggle="collapse" data-target="#searchCol" aria-expanded="false" aria-controls="searchCol">> Search Weather <</button>
+				<button id="toggleBtn" class="btn btn-primary col" type="button" data-toggle="collapse" data-target="#searchCollapse" aria-expanded="false" aria-controls="searchCollapse">> Search Weather <</button>
 			
 			</div>
 
@@ -52,33 +52,33 @@
 
 	</header>
 
-	<aside class='container-fluid'>
+	<aside class='container-fluid collapse' id="searchCollapse">
 
-		<div class="searchCol collapse" id="searchCol">
+		<div class="searchCol" id="searchCol">
 
-			<div class='row justify-content-center'>
+				<div class='row justify-content-center' id="searchContent">
 
-				<h4 class='col-md-3 col-sm-3' class id='searchHeader'>Search   <i class="fas fa-arrow-circle-right"></i></h4>
-				
-				<div class='col-md-auto col-sm-auto'>
+					<h4 class='col-md-auto col-sm-auto' class id='searchHeader'>Search/History</h4>
+					
+					<div class='col-md-auto col-sm-auto'>
 
-					<div class="input-group mb-3">
+						<div class="input-group mb-3">
 
-						<input id="searchInput" type="text" class="form-control" placeholder="City">
+							<input id="searchInput" type="text" class="form-control" placeholder="City or region">
 
-						<div class="input-group-append">	
+							<div class="input-group-append">	
 
-							<button class="btn searchBtn btn-outline-secondary" type="button" id="searchBtn">
-								<i class="fas fa-search"></i>
-							</button>
+								<button class="btn searchBtn btn-outline-secondary" type="button" id="searchBtn">
+									<i class="fas fa-search"></i>
+								</button>
 
-						</div>
+							</div>
 
-					</div>	
-				
-				</div>
+						</div>	
+					
+					</div>
 
-			</div>	
+				</div>	
 
 			<div class='history row'>
 
@@ -108,6 +108,7 @@
 		Weather data provided by <a href="https://openweathermap.org/">openweathermap.org</a>
 
 	</footer>
+
 
 </body>
 
