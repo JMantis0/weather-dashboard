@@ -235,6 +235,10 @@ h3, #searchHeader{
 	background-color: rgb(255, 38, 255)
 }
 
+main {
+	margin-bottom: 30px;
+}
+
 .forecast h3 {
 	position: relative;
 	top: 40px;
