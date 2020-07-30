@@ -1,17 +1,17 @@
 $(document).ready(function () {
   //  Assign local vars.
-  let cityInput = $("#searchInput");
-  let searchBtn = $("#searchBtn");
-  let history = $(".history");
-  let currentDay = $("#currentDay");
-  let fiveDay = $("#fiveDay");
-  let apiKey = "9c651b783881ed4ccbd7fb3242a0070e";
+  const cityInput = $("#searchInput");
+  const searchBtn = $("#searchBtn");
+  const history = $(".history");
+  const currentDay = $("#currentDay");
+  const fiveDay = $("#fiveDay");
+  const apiKey = "9c651b783881ed4ccbd7fb3242a0070e";
   let storedSearches = [];
-  let observer = new MutationObserver(callback);
+  let observer = new MutationObserver(mutationObserverCallback);
   observer.observe($("#toggleBtn")[0], { attributes: true });
 
-  function callback(mutations) {
-    for (let mutation of mutations) {
+  function mutationObserverCallback(mutations) {
+    for (const mutation of mutations) {
       if (mutation.type === "attributes") {
         if ($("#toggleBtn").attr("aria-expanded") === "false") {
           $("#toggleBtn").text("> Search Weather <");
@@ -28,10 +28,10 @@ $(document).ready(function () {
     if (localStorage.getItem("searches") !== null) {
       storedSearches = JSON.parse(localStorage.getItem("searches"));
 
-      for (let i = 0; i < storedSearches.length; i++) {
+      for (const storedSearch of storedSearches) {
         let newCol = $(`<div class='col-md-3 col-sm-4 col-6 histCol'></div>`);
         let histBtn = $(
-          `<button class='btn btn-outline-secondary histBtn ${storedSearches[i]}' id='${storedSearches[i]}' type='button'>${storedSearches[i]}</button>`
+          `<button class='btn btn-outline-secondary histBtn ${storedSearch}' id='${storedSearch}' type='button'>${storedSearch}</button>`
         );
         let delBtn = $(`<span class="btn del">&times;</span>`);
         newCol.append(histBtn);
@@ -221,30 +221,30 @@ $(document).ready(function () {
       ).appendTo(currentDay);
 
       //  Add 5 day forecast data to HTML
-      for (let i = 1; i < 6; i++) {
+      for (const data of oneCallData.daily) {
         $(
           `<div class='col-lg col-md-4 col-sm-6 col- forecast added'>
 
 					<div class='animated fadeIn row'>
-						<h3>${moment.unix(oneCallData.daily[i].dt).format("ddd M-D")}</h3>
+						<h3>${moment.unix(data.dt).format("ddd M-D")}</h3>
 					</div>
 
 					<div class='animated fadeIn row'>
 						<img src=` +
             "https://openweathermap.org/img/wn/" +
-            `${oneCallData.daily[i].weather[0].icon}@2x.png>
+            `${data.weather[0].icon}@2x.png>
 					</div>
 
 					<div class='animated fadeIn row'>
-						<p class='high'>${Math.round(oneCallData.daily[i].temp.max)} °F</p>
+						<p class='high'>${Math.round(data.temp.max)} °F</p>
 					</div>
 
 					<div class='animated fadeIn row'>
-						<p class='low'>${Math.round(oneCallData.daily[i].temp.min)} °F</p>
+						<p class='low'>${Math.round(data.temp.min)} °F</p>
 					</div>
 
 					<div class='animated fadeIn row humi'>
-						<p><i class="fas fa-tint drop"></i>&nbsp${oneCallData.daily[i].humidity} %</p>
+						<p><i class="fas fa-tint drop"></i>&nbsp${data.humidity} %</p>
 					</div>
 
 				</div>`
