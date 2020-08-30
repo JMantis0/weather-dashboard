@@ -1,174 +1,134 @@
 $(document).ready(function () {
+  //  Assign local vars.
+  const cityInput = $("#searchInput");
+  const searchBtn = $("#searchBtn");
+  const history = $(".history");
+  const currentDay = $("#currentDay");
+  const fiveDay = $("#fiveDay");
+  const apiKey = "9c651b783881ed4ccbd7fb3242a0070e";
+  let storedSearches = [];
+  let observer = new MutationObserver(mutationObserverCallback);
+  observer.observe($("#toggleBtn")[0], { attributes: true });
 
-	//  Assign local vars.
-	let cityInput = $("#searchInput");
-	let searchBtn = $("#searchBtn");
-	let history = $(".history");
-	let currentDay = $("#currentDay")
-	let fiveDay = $("#fiveDay");
-	let apiKey = "9c651b783881ed4ccbd7fb3242a0070e";
-	let storedSearches = [];
-	let observer = new MutationObserver(callback);
-	observer.observe($("#toggleBtn")[0], {attributes:true});
-	
-	function callback(mutations) {
+  function mutationObserverCallback(mutations) {
+    for (const mutation of mutations) {
+      if (mutation.type === "attributes") {
+        if ($("#toggleBtn").attr("aria-expanded") === "false") {
+          $("#toggleBtn").text("> Search Weather <");
+        } else if ($("#toggleBtn").attr("aria-expanded") === "true") {
+          $("#toggleBtn").text("Close Search");
+        }
+      }
+    }
+  }
 
-		for(let mutation of mutations) {
+  //  Function initialize is called on page open or refresh.
+  //  Renders list of history buttons from localStorage.
+  function initialize() {
+    if (localStorage.getItem("searches") !== null) {
+      storedSearches = JSON.parse(localStorage.getItem("searches"));
 
-			if (mutation.type === 'attributes') {
+      for (const storedSearch of storedSearches) {
+        let newCol = $(`<div class='col-md-3 col-sm-4 col-6 histCol'></div>`);
+        let histBtn = $(
+          `<button class='btn btn-outline-secondary histBtn ${storedSearch}' id='${storedSearch}' type='button'>${storedSearch}</button>`
+        );
+        let delBtn = $(`<span class="btn del">&times;</span>`);
+        newCol.append(histBtn);
+        histBtn.append(delBtn);
+        history.prepend(newCol);
+      }
+    }
 
-				if ($("#toggleBtn").attr("aria-expanded") === "false") {
+    assignListeners();
+    history.find(".histBtn").first().click();
+  }
 
-					$("#toggleBtn").text("> Search Weather <");
+  // Function assignListeners assigns event listeners.
+  function assignListeners() {
+    $(".histBtn").off();
+    cityInput.off();
+    $(".del").off();
+    searchBtn.off();
+    $("#toggleBtn").off();
 
-				}
-				else if ($("#toggleBtn").attr("aria-expanded") === "true") {
+    $(".histBtn").click(callbackCoordinates);
+    searchBtn.click(callbackCoordinates);
 
-					$("#toggleBtn").text("Close Search");
+    $(".del").click(function (event) {
+      event.stopPropagation();
+      storedSearches = storedSearches.filter(
+        (item) => item !== $(this).parents(".histBtn").attr("id")
+      );
+      localStorage.setItem("searches", JSON.stringify(storedSearches));
+      $(this).parents(".history .histCol").remove();
+    });
 
-				}
+    cityInput.keydown(function (event) {
+      if (event.keyCode === 13) {
+        searchBtn.click();
+      }
+    });
+  }
 
-			}
+  //  Function callbackCoordinates calls OpenWeatherMaps API for current weather data.
+  function callbackCoordinates() {
+    let city;
 
-		}
-		
-	}
-	
-	
-	//  Function initialize is called on page open or refresh.
-	//  Renders list of history buttons from localStorage.
-	function initialize() {
-		
-		if(localStorage.getItem("searches") !== null) {
+    if ($(this).hasClass("searchBtn")) {
+      city = cityInput.val();
+    }
+    if ($(this).hasClass("histBtn")) {
+      city = $(this).attr("id");
+    }
 
-			storedSearches = JSON.parse(localStorage.getItem("searches"));
+    let queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
 
-			for(let i = 0; i < storedSearches.length; i++) {
+    $.ajax({
+      url: queryURL,
+      method: "GET",
+    }).then(function (currentWeatherData) {
+      //  Assign data attributes to history button for latitude and longitude
+      //  Append to history section in HTML
+      if (!$(".histBtn").hasClass(currentWeatherData.name)) {
+        storedSearches.push(currentWeatherData.name);
+        localStorage.setItem("searches", JSON.stringify(storedSearches));
+        let newCol = $(`<div class='col-md-3 col-sm-4 col-6 histCol'></div>`);
+        let histBtn = $(
+          `<button class='btn btn-outline-secondary histBtn inline ${currentWeatherData.name}' id='${currentWeatherData.name}' type='button'>${currentWeatherData.name}</button>`
+        );
+        let delBtn = $(`<span class="btn del">&times;</span>`);
+        newCol.append(histBtn);
+        histBtn.append(delBtn);
+        history.prepend(newCol);
+      } else {
+        storedSearches = storedSearches.filter(
+          (item) => item !== currentWeatherData.name
+        );
+        storedSearches.push(currentWeatherData.name);
+        localStorage.setItem("searches", JSON.stringify(storedSearches));
+        let existingBtn = $(`[id ='${currentWeatherData.name}']`);
+        existingBtn.parents(".histCol").remove();
+        let newCol = $(`<div class='col-md-3 col-sm-4  col-6 histCol'></div>`);
+        newCol.append(existingBtn);
+        history.prepend(newCol);
+      }
 
-				let newCol = $(`<div class='col-md-3 col-sm-4 col-6 histCol'></div>`)
-				let histBtn = $(`<button class='btn btn-outline-secondary histBtn ${storedSearches[i]}' id='${storedSearches[i]}' type='button'>${storedSearches[i]}</button>`);
-				let delBtn = $(`<span class="btn del">&times;</span>`);
-				newCol.append(histBtn);
-				histBtn.append(delBtn);
-				history.prepend(newCol);
+      callbackOneCallAPI(currentWeatherData);
+    });
+  }
 
-			}
-			
-		}
+  //  Function callbackOneCallAPI calls another OpenWeatherMaps API for 5 day forecast data.
+  //  New divs are created with jQuery, populated with data, and rendered to HTML.
+  function callbackOneCallAPI(currentWeatherData) {
+    $.ajax({
+      url: `https://api.openweathermap.org/data/2.5/onecall?lat=${currentWeatherData.coord.lat}&lon=${currentWeatherData.coord.lon}&exclude=hourly&appid=${apiKey}&units=imperial`,
+      method: "GET",
+    }).then(function (oneCallData) {
+      $(".added").remove();
 
-		assignListeners();
-		history.find(".histBtn").first().click();
-
-	}
-	
-	// Function assignListeners assigns event listeners.
-	function assignListeners() {
-
-		$(".histBtn").off();
-		cityInput.off();
-		$(".del").off();
-		searchBtn.off();
-		$("#toggleBtn").off();
-
-		$(".histBtn").click(callbackCoordinates);
-		searchBtn.click(callbackCoordinates);
-
-		$(".del").click(function(event) {
-
-			event.stopPropagation();
-			storedSearches = storedSearches.filter(item => item !== $(this).parents(".histBtn").attr("id"));
-			localStorage.setItem("searches", JSON.stringify(storedSearches));
-			$(this).parents(".history .histCol").remove();
-			
-		});		
-
-		cityInput.keydown(function(event) {
-
-			if (event.keyCode === 13) {
-
-				searchBtn.click();
-
-			}
-
-		});
-
-	}
-
-	//  Function callbackCoordinates calls OpenWeatherMaps API for current weather data.
-	function callbackCoordinates() {	
-	
-
-		let city;
-
-		if($(this).hasClass("searchBtn")) {
-
-			city = cityInput.val();
-		}
-		if($(this).hasClass("histBtn")) {
-
-			city = $(this).attr("id");
-
-		}
-
-		
-		let queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
-
-	
-		$.ajax({
-
-			url: queryURL,
-			method: "GET"
-
-		}).then(function(currentWeatherData) {
-
-			//  Assign data attributes to history button for latitude and longitude
-			//  Append to history section in HTML
-			if(!$(".histBtn").hasClass(currentWeatherData.name)) {
-
-				storedSearches.push(currentWeatherData.name);
-				localStorage.setItem("searches", JSON.stringify(storedSearches));	
-				let newCol = $(`<div class='col-md-3 col-sm-4 col-6 histCol'></div>`);
-				let histBtn = $(`<button class='btn btn-outline-secondary histBtn inline ${currentWeatherData.name}' id='${currentWeatherData.name}' type='button'>${currentWeatherData.name}</button>`);
-				let delBtn = $(`<span class="btn del">&times;</span>`);
-				newCol.append(histBtn);
-				histBtn.append(delBtn);
-				history.prepend(newCol);
-
-			}
-			else {
-
-				storedSearches = storedSearches.filter(item => item !== currentWeatherData.name);
-				storedSearches.push(currentWeatherData.name);	
-				localStorage.setItem("searches", JSON.stringify(storedSearches));
-				let existingBtn = $(`[id ='${currentWeatherData.name}']`);
-				existingBtn.parents(".histCol").remove();
-				let newCol = $(`<div class='col-md-3 col-sm-4  col-6 histCol'></div>`);
-				newCol.append(existingBtn);
-				history.prepend(newCol);
-			}
-
-			callbackOneCallAPI(currentWeatherData);
-
-		});
-
-	}
-
-
-	//  Function callbackOneCallAPI calls another OpenWeatherMaps API for 5 day forecast data.
-	//  New divs are created with jQuery, populated with data, and rendered to HTML.
-	function callbackOneCallAPI(currentWeatherData) {
-
-		
-		$.ajax({
-
-			url: `https://api.openweathermap.org/data/2.5/onecall?lat=${currentWeatherData.coord.lat}&lon=${currentWeatherData.coord.lon}&exclude=hourly&appid=${apiKey}&units=imperial`,
-			method: "GET"
-
-		}).then(function(oneCallData) {
-			$('.added').remove();			
-
-			//  insert currentWeatherData
-			$(`<div class='col-auto added animated fadeIn' id='currentCol'>
+      //  insert currentWeatherData
+      $(`<div class='col-auto added animated fadeIn' id='currentCol'>
 				
 				<div class='styleDiv1'>
 
@@ -177,7 +137,10 @@ $(document).ready(function () {
 					</h2>
 
 					<h4>
-						${moment().utc().add(currentWeatherData.timezone, "s").format("dddd M/D/YY h:mm a")}
+						${moment()
+              .utc()
+              .add(currentWeatherData.timezone, "s")
+              .format("dddd M/D/YY h:mm a")}
 					</h4>
 
 				</div>
@@ -223,82 +186,82 @@ $(document).ready(function () {
 
 			</div>`).appendTo(currentDay);
 
-				
-			
-			// Insert UV data.
-			$(`<div id ='uvBlurb' style='display: inline;' >${oneCallData.current.uvi}</div>`).appendTo($(".blurbHolder"));
+      // Insert UV data.
+      $(
+        `<div id ='uvBlurb' style='display: inline;' >${oneCallData.current.uvi}</div>`
+      ).appendTo($(".blurbHolder"));
 
-			//  Color uvBlurb according to UV Risk.
-			let uvBlurb = $("#uvBlurb");		
-			let uvRisk = oneCallData.current.uvi;
-			if (uvRisk <= 3) {
-				uvBlurb.addClass("lowUV");
-				uvBlurb.parents(".styleDiv3").addClass("outerLowUV");
-			}
-			else if (uvRisk <= 6) {
-				uvBlurb.addClass("moderateUV");
-				uvBlurb.parents(".styleDiv3").addClass("outerModerateUV");
-			}
-			else if (uvRisk <= 8) {
-				uvBlurb.addClass("highUV");
-				uvBlurb.parents(".styleDiv3").addClass("outerHighUV");
-			}
-			else if (uvRisk <=11) {
-				uvBlurb.addClass("veryHighUV");
-				uvBlurb.parents(".styleDiv3").addClass("outerVeryHighUV");
-			}
-			else {
-				uvBlurb.addClass("extremeUV");
-				uvBlurb.parents(".styleDiv3").addClass("OuterExtremeUV");
-			}
+      //  Color uvBlurb according to UV Risk.
+      let uvBlurb = $("#uvBlurb");
+      let uvRisk = oneCallData.current.uvi;
+      if (uvRisk <= 3) {
+        uvBlurb.addClass("lowUV");
+        uvBlurb.parents(".styleDiv3").addClass("outerLowUV");
+      } else if (uvRisk <= 6) {
+        uvBlurb.addClass("moderateUV");
+        uvBlurb.parents(".styleDiv3").addClass("outerModerateUV");
+      } else if (uvRisk <= 8) {
+        uvBlurb.addClass("highUV");
+        uvBlurb.parents(".styleDiv3").addClass("outerHighUV");
+      } else if (uvRisk <= 11) {
+        uvBlurb.addClass("veryHighUV");
+        uvBlurb.parents(".styleDiv3").addClass("outerVeryHighUV");
+      } else {
+        uvBlurb.addClass("extremeUV");
+        uvBlurb.parents(".styleDiv3").addClass("OuterExtremeUV");
+      }
 
-			//  Insert currentWeatherData Icon 
-			$(`<div id='currentIcon' class='added col-md-2 animated fadeIn'>
-				<img  src=` + "https://openweathermap.org/img/wn/" + `${currentWeatherData.weather[0].icon}@2x.png>
-			</div>`).appendTo(currentDay);
+      //  Insert currentWeatherData Icon
+      $(
+        `<div id='currentIcon' class='added col-md-2 animated fadeIn'>
+				<img  src=` +
+          "https://openweathermap.org/img/wn/" +
+          `${currentWeatherData.weather[0].icon}@2x.png>
+			</div>`
+      ).appendTo(currentDay);
 
-			//  Add 5 day forecast data to HTML
-			for(let i=1; i < 6; i++) {				
-				
-				$(`<div class='col-lg col-md-4 col-sm-6 col- forecast added'>
+      //  Add 5 day forecast data to HTML
+      for (const data of oneCallData.daily) {
+        $(
+          `<div class='col-lg col-md-4 col-sm-6 col- forecast added'>
 
 					<div class='animated fadeIn row'>
-						<h3>${moment.unix(oneCallData.daily[i].dt).format("ddd M-D")}</h3>
+						<h3>${moment.unix(data.dt).format("ddd M-D")}</h3>
 					</div>
 
 					<div class='animated fadeIn row'>
-						<img src=` + "https://openweathermap.org/img/wn/" + `${oneCallData.daily[i].weather[0].icon}@2x.png>
+						<img src=` +
+            "https://openweathermap.org/img/wn/" +
+            `${data.weather[0].icon}@2x.png>
 					</div>
 
 					<div class='animated fadeIn row'>
-						<p class='high'>${Math.round(oneCallData.daily[i].temp.max)} °F</p>
+						<p class='high'>${Math.round(data.temp.max)} °F</p>
 					</div>
 
 					<div class='animated fadeIn row'>
-						<p class='low'>${Math.round(oneCallData.daily[i].temp.min)} °F</p>
+						<p class='low'>${Math.round(data.temp.min)} °F</p>
 					</div>
 
 					<div class='animated fadeIn row humi'>
-						<p><i class="fas fa-tint drop"></i>&nbsp${oneCallData.daily[i].humidity} %</p>
+						<p><i class="fas fa-tint drop"></i>&nbsp${data.humidity} %</p>
 					</div>
 
-				</div>`).appendTo(fiveDay);
+				</div>`
+        ).appendTo(fiveDay);
 
-				if(i == 4) {
-					$(".forecast:last").addClass("offset-md-2 offset-lg-0")
-				}
-				if(i == 5) {
-					$(".forecast:last").addClass("offset-sm-3 offset-md-0 offset-lg-0")
-				}
+        if (i == 4) {
+          $(".forecast:last").addClass("offset-md-2 offset-lg-0");
+        }
+        if (i == 5) {
+          $(".forecast:last").addClass("offset-sm-3 offset-md-0 offset-lg-0");
+        }
+      }
 
-			}
+      assignListeners();
+      cityInput.val("");
+    });
+  }
 
-			assignListeners();
-			cityInput.val("");
-		});
-
-	}
-
-	initialize();
-	
+  initialize();
 });
