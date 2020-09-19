@@ -1,31 +1,22 @@
-
-
-:root {
-	--main-bg-color: #18cdf7
-}
-
-
 /* inset border technique borrowed from https://css-tricks.com/body-border/ */
-
 html {
-	background-color: var(--main-bg-color);
+	background-color: #18cdf7;
 	height: 100%;
 }
-
 body {
-	background-color: var(--main-bg-color);
+	background-color:#18cdf7;
 }
 
 header {
-	background-color: var(--main-bg-color);
+	background-color: #18cdf7;
 }
 
 h1 {
-	background-color: var(--main-bg-color);
-	padding: 5px 60px 5px 30px;
-	border-radius: 30px;
+	background-color:#18cdf7;
+	padding:5px 60px 5px 30px;
+	border-radius:30px;
 	text-align: left;
-	margin: 0;
+	margin:0;
 	font-size: 39px;
 }
 
@@ -39,8 +30,8 @@ h4 {
 
 .outline {
 	background-color: rgb(181, 239, 255);
-	padding: 15px;
-	border-radius: 50px;
+	padding:15px;
+	border-radius:50px;
 	width: 75%;
 	min-width: 408px;
 	max-height: 160.5px;
@@ -51,27 +42,27 @@ h4 {
 	width: 290px;
 }
 
-#searchCollapse {
+#searchCollapse{
 	padding: 0;
 }
 
 #toggleBtn {
-	border-radius: 30px;
+	border-radius:30px;
 	margin-left: 30px;
 	margin-right: 20px;
 	height: 50px;
 	margin-top: 30px;
-	background-color: rgb(53, 90, 175);
+	background-color: rgb(53, 90, 175);	
 }
 
-h3,
-#searchHeader {
+
+h3, #searchHeader{
 	background-color: rgb(181, 239, 255);
 	padding: 5px 45px;
-	border-radius: 20px;
+	border-radius:20px;
 	text-align: center;
 	align-items: center;
-	margin-bottom: 15px;
+	margin-bottom:15px;
 }
 
 .hidden {
@@ -79,15 +70,15 @@ h3,
 }
 
 #searchCol {
-	background-color: white;
+	background-color:white;
 	width: 100%;
 }
 
 #searchBtn {
-	background-color: white;
+	background-color: white;	
 }
 
-#searchInput {
+#searchInput{
 	border: 1px gray solid;
 }
 
@@ -97,12 +88,12 @@ h3,
 	margin-top: 5px;
 	color: white;
 	background-color: rgb(53, 90, 175);
-	display: inline-block;
-	width: 100%
+	display:inline-block;
+	width:100%
 }
 
 .title {
-	width: 55%;
+	width:55%;
 }
 
 .value {
@@ -134,7 +125,7 @@ h3,
 }
 
 .del {
-	position: absolute;
+	position:absolute;
 	top: 0px;
 	right: 0px;
 	padding: 0 0 0 0;
@@ -145,33 +136,52 @@ h3,
 }
 
 #currentIcon {
-	text-align: center;
+	text-align:center;
 }
 
 #currentIcon img {
 	width: 220px;
 }
 
-#searchCol,
-#currentDay,
-.forecast,
-header {
+#searchCol, #currentDay, .forecast, header {
 	padding: 40px;
-	overflow-x: hidden;
-	/* For Opera */
-	-webkit-box-shadow: inset #19d4ff 0 0 0 5px, inset #18cdf7 0 0 0 1px, inset #53dfff 0 0 0 10px, inset #50d8f7 0 0 0 11px, inset #8ce9ff 0 0 0 16px, inset #88e2f7 0 0 0 17px, inset #c5f4ff 0 0 0 22px, inset #bfecf7 0 0 0 23px;
-	-moz-box-shadow: inset #19d4ff 0 0 0 5px, inset #18cdf7 0 0 0 1px, inset #53dfff 0 0 0 10px, inset #50d8f7 0 0 0 11px, inset #8ce9ff 0 0 0 16px, inset #88e2f7 0 0 0 17px, inset #c5f4ff 0 0 0 22px, inset #bfecf7 0 0 0 23px;
-	box-shadow: inset #19d4ff 0 0 0 5px, inset #18cdf7 0 0 0 1px, inset #53dfff 0 0 0 10px, inset #50d8f7 0 0 0 11px, inset #8ce9ff 0 0 0 16px, inset #88e2f7 0 0 0 17px, inset #c5f4ff 0 0 0 22px, inset #bfecf7 0 0 0 23px;
+	overflow-x: hidden; /* For Opera */
+	-webkit-box-shadow:
+	inset #19d4ff 0 0 0 5px,
+	inset #18cdf7 0 0 0 1px,
+	inset #53dfff 0 0 0 10px,
+	inset #50d8f7 0 0 0 11px,
+	inset #8ce9ff 0 0 0 16px,
+	inset #88e2f7 0 0 0 17px,
+	inset #c5f4ff 0 0 0 22px,
+	inset #bfecf7 0 0 0 23px;
+	-moz-box-shadow:
+	inset #19d4ff 0 0 0 5px,
+	inset #18cdf7 0 0 0 1px,
+	inset #53dfff 0 0 0 10px,
+	inset #50d8f7 0 0 0 11px,
+	inset #8ce9ff 0 0 0 16px,
+	inset #88e2f7 0 0 0 17px,
+	inset #c5f4ff 0 0 0 22px,
+	inset #bfecf7 0 0 0 23px;
+	box-shadow:
+	inset #19d4ff 0 0 0 5px,
+	inset #18cdf7 0 0 0 1px,
+	inset #53dfff 0 0 0 10px,
+	inset #50d8f7 0 0 0 11px,
+	inset #8ce9ff 0 0 0 16px,
+	inset #88e2f7 0 0 0 17px,
+	inset #c5f4ff 0 0 0 22px,
+	inset #bfecf7 0 0 0 23px;
 }
 
 .forecast {
 	padding: 0px;
 }
 
-#currentCol .row:last-child,
-#currentCol h4:last-child {
-	margin-bottom: 0px;
-	padding-bottom: 2px;
+#currentCol .row:last-child, #currentCol h4:last-child  {
+	margin-bottom:0px;
+	padding-bottom:2px;
 }
 
 #uvBlurb {
@@ -235,23 +245,21 @@ main {
 	font-size: 24px;
 }
 
-.forecast img {
+.forecast img  {
 	width: 150px;
 	position: relative;
 }
 
-.forecast .high,
-.forecast .low,
-.forecast .humi {
+.forecast .high, .forecast .low, .forecast .humi {
 	position: relative;
 	bottom: 30px;
 }
 
-.forecast>* {
-	margin: 0 auto;
+.forecast > * {
+	margin:0 auto;
 	align-items: center;
 	justify-content: center;
-	color: black;
+	color:black;
 }
 
 .low {
@@ -259,8 +267,7 @@ main {
 	color: blue;
 }
 
-.low p,
-.row .low {
+.low p, .row .low {
 	padding: 0 10px;
 	border-radius: 30px;
 	background-color: white;
@@ -270,6 +277,7 @@ main {
 	color: blue;
 	background-color: rgb(167, 235, 250);
 }
+
 
 .humi {
 	font-size: 26px;
@@ -283,17 +291,15 @@ main {
 	background-color: rgb(167, 235, 250);
 }
 
-.high p,
-.row .high {
-	background-color: rgb(255, 232, 236);
-	;
+.high p, .row .high {
+	background-color: rgb(255, 232, 236);;
 	padding: 0 10px;
 	border-radius: 30px;
 }
 
 .high {
 	font-size: 26px;
-	color: red;
+	color:red;
 }
 
 .fa-tint {
@@ -302,13 +308,13 @@ main {
 }
 
 footer {
-	background-color: white;
+	background-color:white;
 	position: fixed;
 	bottom: 0;
 	width: 100%;
 	margin: 0;
 	padding: 0;
-	text-align: center;
+	text-align:center;
 	font-size: 16px;
 }
 
@@ -317,55 +323,70 @@ a {
 }
 
 @media screen and (max-width: 768px) {
+
 	#currentDay {
 		padding-bottom: 0px;
 	}
+
 }
 
+
 @media screen and (max-width: 732px) {
+	
 	#toggleBtn {
-		margin: 5px;
-		height: 30px;
-		padding-top: 0px;
+		margin:5px;
+		height:30px;
+		padding-top:0px;
+		
 	}
+
 	.inline {
-		width: 100%;
+		width:100%;
 	}
+	
 	.outline {
 		padding-bottom: 60px;
 	}
+
 }
 
 @media screen and (max-width: 510px) {
+
 	h1 {
-		min-width: 300px;
+		min-width:300px;
 		min-height: 100px
 	}
-	.outline {
+	.outline { 
 		min-width: 330px;
 		min-height: 150px;
 	}
+
 	#currentIcon img {
 		width: 150px;
 	}
+
 	h2 {
 		font-size: 30px;
 	}
+
 	h4 {
 		font-size: 22px;
 	}
+
 }
 
 @media screen and (max-width: 400px) {
+
 	h2 {
 		font-size: 25px;
 	}
+
 	h4 {
 		font-size: 19px;
 	}
-	#currentDay .high,
-	#currentDay .low {
-		font-size: 16px;
-	}
-}
 
+	 #currentDay .high, #currentDay .low {
+		font-size:16px;
+	}
+
+}
