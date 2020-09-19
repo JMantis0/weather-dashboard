@@ -6,6 +6,7 @@ $(document).ready(function () {
   let currentDay = $("#currentDay");
   let fiveDay = $("#fiveDay");
   let apiKey = "9c651b783881ed4ccbd7fb3242a0070e";
+  console.log(apiKey);
   let storedSearches = [];
   let observer = new MutationObserver(callback);
   observer.observe($("#toggleBtn")[0], { attributes: true });
