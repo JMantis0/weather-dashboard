@@ -28,7 +28,7 @@ Searches are saved, stored, and rendered into buttons in your search history tha
 
  Application utilizes the Bootstrap CSS Framework to be fully functional across browser sizes and mobile devices.
 
- ![mobile](assets/images/weathervane-mobile.gif)
+ ![mobile](assets/images/weathervane-mobile2.gif)
 
  ## -Contributors-
 
